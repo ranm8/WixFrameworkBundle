@@ -1,0 +1,16 @@
+services:
+    wix_base.decoder:
+        class: Wix\BaseBundle\Instance\Decoder
+        arguments: [%wix_base.config.keys%]
+
+    wix_base.controller.listener:
+        class: Wix\BaseBundle\EventListener\ControllerListener
+        arguments: [@annotation_reader, @wix_base.decoder]
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
+
+    wix_base.debug_toolbar:
+        class: Wix\BaseBundle\EventListener\WixDebugToolbarListener
+        arguments: [@templating.engine.twig, @wix_base.decoder, %wix_base.config%]
+        tags:
+            - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }

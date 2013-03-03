@@ -1,0 +1,47 @@
+<style>
+    .toolbar {
+        width: 100%;
+        min-height: 30px;
+        position: fixed;
+        top: 0px;
+        right: 0px;
+        background-color: #1B1B1B;
+        z-index: 1030;
+        height: auto;
+        overflow: visible;
+    }
+
+    .toolbar ul {
+        margin: 0 10px 0 0;
+        display: block;
+        list-style: none;
+        position: relative;
+        left: 0;
+        float: left;
+        padding: 0;
+        color: ghostwhite;
+        font-size: 13px;
+    }
+
+    .toolbar li {
+        float: left;
+        padding: 10px 15px 10px;
+        font-family: Verdana, Arial;
+    }
+
+    .toolbar a {
+        color: ghostwhite;
+    }
+</style>
+
+<div class="toolbar">
+    <ul>
+        <li><strong>Instance ID:</strong> {{ instance.instanceId }}</li>
+        <li><strong>Sign date:</strong> {{ instance.signDate }}</li>
+        <li><strong>UID:</strong> {{ instance.uid }}</li>
+        <li><strong>Permission:</strong> {{ instance.permissions }}</li>
+        <li><a target="_blank"
+               href="http://editor.wix.com/html/editor/web/renderer/new?siteId=b1b3473c-8124-4de4-a074-0f650b1b3ee4&editorSessionId=2107643A-2685-4A53-9AED-0F485F43AC9A&appDefinitionId={{ application_key }}">View
+                in Wix editor</a></li>
+    </ul>
+</div>

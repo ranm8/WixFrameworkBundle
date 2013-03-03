@@ -10,7 +10,7 @@ services:
             - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
 
     wix_base.debug_toolbar:
-        class: Wix\BaseBundle\EventListener\WixDebugToolbarListener
-        arguments: [@templating.engine.twig, @wix_base.decoder, %wix_base.config%]
+        class: Wix\BaseBundle\DataCollector\DebugToolbar
+        arguments: [@wix_base.decoder, %wix_base.config.keys%]
         tags:
-            - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
+            - { name: data_collector, template: "WixBaseBundle:Collector:toolbar.html.twig", id: "wix_base_debug_toolbar" }

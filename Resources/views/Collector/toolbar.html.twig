@@ -1,0 +1,41 @@
+{% extends 'WebProfilerBundle:Profiler:layout.html.twig' %}
+
+{% block toolbar %}
+    <div class="toolbar">
+        <ul>
+            <li><strong>instance id</strong>: {{ collector.instance.instance_id }}</li>
+            <li><strong>sign date</strong>: {{ collector.instance.sign_date }}</li>
+            <li><strong>uid</strong>: {{ collector.instance.uid }}</li>
+            <li><strong>permissions</strong>: {{ collector.instance.permissions }}</li>
+            <li><a target="_blank"
+                   href="http://editor.wix.com/html/editor/web/renderer/new?siteId=b1b3473c-8124-4de4-a074-0f650b1b3ee4&editorSessionId=2107643A-2685-4A53-9AED-0F485F43AC9A&appDefinitionId={{ collector.applicationkey }}">View
+                    in Wix editor</a>
+            </li>
+        </ul>
+    </div>
+{% endblock %}
+
+{% block menu %}
+    <span class="label">
+    <span class="icon"><img src="{{ asset('bundles/webprofiler/images/profiler/request.png') }}" alt="Wix" /></span>
+    <strong>Wix</strong>
+</span>
+{% endblock %}
+
+{% block panel %}
+    <h2>Wix debug information!</h2>
+
+    <h3>Instance information</h3>
+    <ul>
+        <li>instance id (identifies a single instance of your application in an application of a user): {{ collector.instance.instance_id }}</li>
+        <li>sign date (the date in which this user logged into wix): {{ collector.instance.sign_date }}</li>
+        <li>uid (a unique id of a wix user): {{ collector.instance.uid }}</li>
+        <li>permissions (lets you know if this user is the owner of this wix website or just a visitor): {{ collector.instance.permissions }}</li>
+    </ul>
+
+    <h3>View your application in the wix editor</h3>
+    <a target="_blank"
+       href="http://editor.wix.com/html/editor/web/renderer/new?siteId=b1b3473c-8124-4de4-a074-0f650b1b3ee4&editorSessionId=2107643A-2685-4A53-9AED-0F485F43AC9A&appDefinitionId={{ collector.applicationkey }}">View
+        in Wix editor
+    </a>
+{% endblock %}

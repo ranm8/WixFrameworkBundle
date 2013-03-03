@@ -7,3 +7,7 @@ Propel/om/*
 Propel/map/*
 
 vendor/*
+
+.project
+.settings
+.idea/*

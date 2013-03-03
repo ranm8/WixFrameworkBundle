@@ -1,0 +1,29 @@
+{
+    "name": "wix/framework-component",
+    "type": "library",
+    "description": "The Wix application framework built by the PSR standards",
+    "keywords": ["Wix"],
+    "homepage": "https://github.com/ranm8/WixFrameworkComponent",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ran Mizrahi",
+            "email": "ranm@codeoasis.com"
+        },
+        {
+            "name": "Ronen Amiel",
+            "email": "ronena@codeoasis.com"
+        },
+        {
+          	"name": "Elad Rom",
+          	"email": "rome@codeoasis.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+    },
+    "autoload": {
+        "psr-0": { "Wix\\FrameworkComponent": "" }
+    },
+    "target-dir": "Wix/FrameworkComponent"
+}

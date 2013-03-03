@@ -17,6 +17,6 @@ class WixController extends Controller
      */
     public function indexAction()
     {
-        return new Response('<html><body><h1 style="padding: 45px 25px; font-size: 72px;">Hello Wix!</h1></body></html>');
+        return new Response('Hello Wix!');
     }
 }

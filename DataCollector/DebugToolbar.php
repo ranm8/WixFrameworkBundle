@@ -65,11 +65,11 @@ class DebugToolbar extends DataCollector
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getApplicationKey()
+    public function getKeys()
     {
-        return $this->data['config']['keys']['application_key'];
+        return $this->data['config']['keys'];
     }
 
     /**

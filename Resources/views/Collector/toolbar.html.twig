@@ -2,19 +2,45 @@
 
 {% block toolbar %}
     {% if collector.instance is not null %}
-    <div class="toolbar">
-        <ul>
-            <li><strong>instance id</strong>: {{ collector.instance.instance_id }}</li>
-            <li><strong>sign date</strong>: {{ collector.instance.sign_date }}</li>
-            <li><strong>uid</strong>: {{ collector.instance.uid }}</li>
-            <li><strong>permissions</strong>: {{ collector.instance.permissions }}</li>
-            <li><a target="_blank"
+        {% set icon %}
+            <span>
+                <img width="13" height="28" alt="Memory Usage" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAcBAMAAABITyhxAAAAJ1BMVEXNzc3///////////////////////8/Pz////////////+NjY0/Pz9lMO+OAAAADHRSTlMAABAgMDhAWXCvv9e8JUuyAAAAQ0lEQVQI12MQBAMBBmLpMwoMDAw6BxjOOABpHyCdAKRzsNDp5eXl1KBh5oHBAYY9YHoDQ+cqIFjZwGCaBgSpBrjcCwCZgkUHKKvX+wAAAABJRU5ErkJggg=="/>
+                <span>Wix information</span>
+            </span>
+        {% endset %}
+        {% set text %}
+            <div class="sf-toolbar-info-piece">
+                <b>Instance Id</b>
+                <span>{{ collector.instance.instance_id }}</span>
+            </div>
+            <div class="sf-toolbar-info-piece">
+                <b>Sign Date</b>
+                <span>{{ collector.instance.sign_date }}</span>
+            </div>
+            <div class="sf-toolbar-info-piece">
+                <b>UID</b>
+                <span>{{ collector.instance.uid }}</span>
+            </div>
+            <div class="sf-toolbar-info-piece">
+                <b>Permissions</b>
+                <span>{{ collector.instance.permissions }}</span>
+            </div>
+            <div class="sf-toolbar-info-piece">
+                <a target="_blank"
                    href="http://editor.wix.com/html/editor/web/renderer/new?siteId=b1b3473c-8124-4de4-a074-0f650b1b3ee4&editorSessionId=2107643A-2685-4A53-9AED-0F485F43AC9A&appDefinitionId={{ collector.keys.application_key }}">
                     View in Wix editor</a>
-            </li>
-        </ul>
-    </div>
+            </div>
+        {% endset %}
+        {% include '@WebProfiler/Profiler/toolbar_item.html.twig' with { 'link': false } %}
     {% endif %}
+{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+
+    <style>
+
+    </style>
 {% endblock %}
 
 {% block menu %}
@@ -25,21 +51,33 @@
 {% endblock %}
 
 {% block panel %}
-    <h2>Wix debug information!</h2>
+    <h2>Instance information</h2>
+    <table>
+        <tr>
+            <th>Item name</th>
+            <th>Value</th>
+        </tr>
+        {% for key, value in collector.instance %}
+            <tr>
+                <td><code>{{ key }}</code></td>
+                <td><code>{{ value }}</code></td>
+            </tr>
+        {% endfor %}
+    </table>
 
-    <h3>Instance information</h3>
-    <ul>
-        <li><strong>instance id</strong> (identifies a single instance of your application in an application of a user): {{ collector.instance.instance_id }}</li>
-        <li><strong>sign date</strong> (the date in which this user logged into wix): {{ collector.instance.sign_date }}</li>
-        <li><strong>uid</strong> (a unique id of a wix user): {{ collector.instance.uid }}</li>
-        <li><strong>permissions</strong> (lets you know if this user is the owner of this wix website or just a visitor): {{ collector.instance.permissions }}</li>
-    </ul>
-
-    <h3>Application information</h3>
-    <ul>
-        <li><strong>Application key:</strong> {{ collector.keys.application_key }}</li>
-        <li><strong>Application key:</strong> {{ collector.keys.application_secret }}</li>
-    </ul>
+    <h2>Application information</h2>
+    <table>
+        <tr>
+            <th>Item name</th>
+            <th>Value</th>
+        </tr>
+        {% for key, value in collector.keys %}
+            <tr>
+                <td><code>{{ key }}</code></td>
+                <td><code>{{ value }}</code></td>
+            </tr>
+        {% endfor %}
+    </table>
 
     <a target="_blank"
        href="http://editor.wix.com/html/editor/web/renderer/new?siteId=b1b3473c-8124-4de4-a074-0f650b1b3ee4&editorSessionId=2107643A-2685-4A53-9AED-0F485F43AC9A&appDefinitionId={{ collector.keys.application_key }}">

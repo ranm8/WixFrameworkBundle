@@ -1,9 +1,9 @@
 {
-    "name": "wix/framework-component",
-    "type": "library",
-    "description": "The Wix application framework built by the PSR standards",
+    "name": "wix/framework-bundle",
+    "type": "symfony-bundle",
+    "description": "The Wix application framework adjusted to the Symfony2 framework",
     "keywords": ["Wix"],
-    "homepage": "https://github.com/ranm8/WixFrameworkComponent",
+    "homepage": "https://github.com/ranm8/WixFrameworkBundle",
     "license": "MIT",
     "authors": [
         {
@@ -23,7 +23,7 @@
         "php": ">=5.3.3"
     },
     "autoload": {
-        "psr-0": { "Wix\\FrameworkComponent": "" }
+        "psr-0": { "Wix\\FrameworkBundle": "" }
     },
-    "target-dir": "Wix/FrameworkComponent"
+    "target-dir": "Wix/FrameworkBundle"
 }

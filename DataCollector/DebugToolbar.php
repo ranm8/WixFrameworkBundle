@@ -5,7 +5,6 @@ namespace Wix\FrameworkBundle\DataCollector;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Wix\FrameworkBundle\Exception\InvalidInstanceException;
 use Wix\FrameworkComponent\InstanceDecoder;
 use Wix\FrameworkComponent\Instance\InstanceInterface;
 use Wix\FrameworkComponent\Exception\InvalidInstanceException;
@@ -44,20 +43,18 @@ class DebugToolbar extends DataCollector
         try {
             /** @var InstanceInterface $instance */
             $instance = $this->decoder->parse($request->get('instance'));
-        } catch(InvalidInstanceException $exception) {
+        } catch (InvalidInstanceException $exception) {
             return;
         }
 
         $this->data = array(
-            'config'   => array(
-                'keys'          => $this->keys,
-            ),
             'instance' => array(
-                'instance_id'   => $instance->getInstanceId(),
-                'sign_date'     => $instance->getSignDate(),
-                'uid'           => $instance->getUid(),
-                'permissions'   => $instance->getPermissions(),
+                'instance_id' => $instance->getInstanceId(),
+                'sign_date' => $instance->getSignDate(),
+                'uid' => $instance->getUid(),
+                'permissions' => $instance->getPermissions(),
             ),
+            'keys' => $this->keys,
         );
     }
 
@@ -66,7 +63,7 @@ class DebugToolbar extends DataCollector
      */
     public function getKeys()
     {
-        return $this->data['config']['keys'];
+        return $this->data['keys'];
     }
 
     /**
@@ -82,6 +79,6 @@ class DebugToolbar extends DataCollector
      */
     public function getName()
     {
-        return 'wix_base_debug_toolbar';
+        return 'wix_framework_debug_toolbar';
     }
 }

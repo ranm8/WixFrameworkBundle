@@ -7,8 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Wix\FrameworkBundle\Exception\AccessDeniedException;
 use Wix\FrameworkBundle\Configuration\Permission;
-use Wix\FrameworkComponent\InstanceDecoder;
-use Wix\FrameworkComponent\Instance\InstanceInterface;
+use Wix\FrameworkComponent\InstanceDecoderInterface;
 
 /**
  * Listens to KernelController events and makes sure users that access controllers and actions with the @permission
@@ -30,9 +29,9 @@ class ControllerListener
      * Constructor.
      *
      * @param Reader $reader An Reader instance
-     * @param Decoder $decoder
+     * @param InstanceDecoderInterface $decoder
      */
-    public function __construct(Reader $reader, Decoder $decoder)
+    public function __construct(Reader $reader, InstanceDecoderInterface $decoder)
     {
         $this->reader = $reader;
         $this->decoder = $decoder;

@@ -1,16 +1,16 @@
 services:
-    wix_base.decoder:
+    wix_framework.instance_decoder:
         class: Wix\FrameworkComponent\InstanceDecoder
-        arguments: [%wix_base.config.keys%]
+        arguments: [%wix_framework.config.keys%]
 
-    wix_base.controller.listener:
-        class: Wix\BaseBundle\EventListener\ControllerListener
-        arguments: [@annotation_reader, @wix_base.decoder]
+    wix_framework.controller.listener:
+        class: Wix\FrameworkBundle\EventListener\ControllerListener
+        arguments: [@annotation_reader, @wix_framework.instance_decoder]
         tags:
             - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
 
-    wix_base.debug_toolbar:
-        class: Wix\BaseBundle\DataCollector\DebugToolbar
-        arguments: [@wix_base.decoder, %wix_base.config.keys%]
+    wix_framework.debug_toolbar:
+        class: Wix\FrameworkBundle\DataCollector\DebugToolbar
+        arguments: [@wix_framework.instance_decoder, %wix_framework.config.keys%]
         tags:
-            - { name: data_collector, template: "WixBaseBundle:Collector:toolbar.html.twig", id: "wix_base_debug_toolbar" }
+            - { name: data_collector, template: "WixFrameworkBundle:Collector:toolbar.html.twig", id: "wix_framework_debug_toolbar" }

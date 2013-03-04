@@ -25,8 +25,7 @@ class WixFrameworkExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
-        $container->setParameter('wix_base.config', $config);
-        $container->setParameter('wix_base.config.keys', $config['keys']);
-        $container->setParameter('wix_base.config.toolbar', $config['toolbar']);
+        $container->setParameter('wix_framework.config', $config);
+        $container->setParameter('wix_framework.config.keys', $config['keys']);
     }
 }

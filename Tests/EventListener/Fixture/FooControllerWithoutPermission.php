@@ -1,6 +1,6 @@
 <?php
 
-namespace Wix\BaseBundle\Tests\EventListener\Fixture;
+namespace Wix\FrameworkBundle\Tests\EventListener\Fixture;
 
 class FooControllerWithoutPermission
 {

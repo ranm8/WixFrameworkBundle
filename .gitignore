@@ -10,4 +10,4 @@ vendor/*
 
 .project
 .settings
-.idea/*
+.idea/

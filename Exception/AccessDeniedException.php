@@ -1,11 +1,6 @@
 <?php
-/**
- * Ronen Amiel <ronena@codeoasis.com>
- * 2/21/13, 5:04 PM
- * AccessDeniedException.php
- */
 
-namespace Wix\BaseBundle\Exception;
+namespace Wix\FrameworkBundle\Exception;
 
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 

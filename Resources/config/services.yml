@@ -1,6 +1,6 @@
 services:
     wix_base.decoder:
-        class: Wix\BaseBundle\Instance\Decoder
+        class: Wix\FrameworkComponent\InstanceDecoder
         arguments: [%wix_base.config.keys%]
 
     wix_base.controller.listener:

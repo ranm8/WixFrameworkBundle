@@ -1,11 +1,6 @@
 <?php
-/**
- * Ronen Amiel <ronena@codeoasis.com>
- * 2/21/13, 2:08 PM
- * WixPermissions.php
- */
 
-namespace Wix\BaseBundle\Configuration;
+namespace Wix\FrameworkBundle\Configuration;
 
 /**
  * Handles the @permission annotations applicable to controllers and actions to limit access to them only to specific

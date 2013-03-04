@@ -1,11 +1,6 @@
 <?php
-/**
- * Ronen Amiel <ronen.amiel@gmail.com>
- * 01/12/12, 14:55
- * User.php
- */
 
-namespace Wix\BaseBundle\Document;
+namespace Wix\FrameworkBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Symfony\Component\Validator\Constraints as Assert;

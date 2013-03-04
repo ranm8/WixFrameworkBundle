@@ -1,17 +1,17 @@
 <?php
 
-namespace Wix\BaseBundle\Tests\EventListener;
+namespace Wix\FrameworkBundle\Tests\EventListener;
 
 use Doctrine\Common\Annotations\AnnotationReader;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
-use Wix\BaseBundle\EventListener\ControllerListener;
-use Wix\BaseBundle\Tests\EventListener\Fixture\FooControllerPermissionOwnerAtClass;
-use Wix\BaseBundle\Tests\EventListener\Fixture\FooControllerPermissionOwnerAtMethod;
-use Wix\BaseBundle\Tests\EventListener\Fixture\FooControllerPermissionsAtClassAndMethod;
-use Wix\BaseBundle\Tests\EventListener\Fixture\FooControllerWithoutPermission;
+use Wix\FrameworkBundle\EventListener\ControllerListener;
+use Wix\FrameworkBundle\Tests\EventListener\Fixture\FooControllerPermissionOwnerAtClass;
+use Wix\FrameworkBundle\Tests\EventListener\Fixture\FooControllerPermissionOwnerAtMethod;
+use Wix\FrameworkBundle\Tests\EventListener\Fixture\FooControllerPermissionsAtClassAndMethod;
+use Wix\FrameworkBundle\Tests\EventListener\Fixture\FooControllerWithoutPermission;
 
 class ControllerListenerTest extends \PHPUnit_Framework_TestCase
 {

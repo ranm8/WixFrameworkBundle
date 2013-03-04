@@ -1,6 +1,6 @@
 <?php
 
-namespace Wix\BaseBundle;
+namespace Wix\FrameworkBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

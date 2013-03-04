@@ -1,23 +1,19 @@
 <?php
-/**
- * Ronen Amiel <ronena@codeoasis.com>
- * 3/3/13, 2:57 PM
- * DebugToolbar.php
- */
 
-namespace Wix\BaseBundle\DataCollector;
+namespace Wix\FrameworkBundle\DataCollector;
 
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Wix\BaseBundle\Exception\InvalidInstanceException;
-use Wix\BaseBundle\Instance\Decoder;
-use Wix\BaseBundle\Instance\Instance;
+use Wix\FrameworkBundle\Exception\InvalidInstanceException;
+use Wix\FrameworkComponent\InstanceDecoder;
+use Wix\FrameworkComponent\Instance\InstanceInterface;
+use Wix\FrameworkComponent\Exception\InvalidInstanceException;
 
 class DebugToolbar extends DataCollector
 {
     /**
-     * @var Decoder
+     * @var InstanceDecoder
      */
     protected $decoder;
 
@@ -29,10 +25,10 @@ class DebugToolbar extends DataCollector
     /**
      * Constructor.
      *
-     * @param Decoder $decoder
+     * @param InstanceDecoder $decoder
      * @param array $keys
      */
-    public function __construct(Decoder $decoder, array $keys)
+    public function __construct(InstanceDecoder $decoder, array $keys)
     {
         $this->decoder = $decoder;
         $this->keys = $keys;
@@ -46,6 +42,7 @@ class DebugToolbar extends DataCollector
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
         try {
+            /** @var InstanceInterface $instance */
             $instance = $this->decoder->parse($request->get('instance'));
         } catch(InvalidInstanceException $exception) {
             return;
@@ -73,7 +70,7 @@ class DebugToolbar extends DataCollector
     }
 
     /**
-     * @return Instance
+     * @return InstanceInterface
      */
     public function getInstance()
     {

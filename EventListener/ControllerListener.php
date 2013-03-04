@@ -1,19 +1,14 @@
 <?php
-/**
- * Ronen Amiel <ronena@codeoasis.com>
- * 2/21/13, 2:43 PM
- * ControllerListener.php
- */
 
-namespace Wix\BaseBundle\EventListener;
+namespace Wix\FrameworkBundle\EventListener;
 
 use Doctrine\Common\Annotations\Reader;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
-use Wix\BaseBundle\Exception\AccessDeniedException;
-use Wix\BaseBundle\Configuration\Permission;
-use Wix\BaseBundle\Instance\Decoder;
-use Wix\BaseBundle\Instance\Instance;
+use Wix\FrameworkBundle\Exception\AccessDeniedException;
+use Wix\FrameworkBundle\Configuration\Permission;
+use Wix\FrameworkComponent\InstanceDecoder;
+use Wix\FrameworkComponent\Instance\InstanceInterface;
 
 /**
  * Listens to KernelController events and makes sure users that access controllers and actions with the @permission

@@ -1,8 +1,8 @@
 <?php
 
-namespace Wix\BaseBundle\Tests\EventListener\Fixture;
+namespace Wix\FrameworkBundle\Tests\EventListener\Fixture;
 
-use Wix\BaseBundle\Configuration\Permission;
+use Wix\FrameworkBundle\Configuration\Permission;
 
 /**
  * @Permission({"OWNER"})

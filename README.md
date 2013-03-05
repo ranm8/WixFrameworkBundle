@@ -17,7 +17,7 @@ For including WixFrameworkBundle as dependancy for your Symfony2 application jus
 		"wix/framework-bundle": "dev-master"
 	}
 
-Then, run composer install
+Then, run composer:
 
     composer install
 

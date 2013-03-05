@@ -31,7 +31,7 @@ class ControllerListenerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Wix\BaseBundle\Exception\AccessDeniedException
+     * @expectedException \Wix\FrameworkBundle\Exception\AccessDeniedException
      */
     public function testPermissionOwnerAtMethodWitInvalidPermissions()
     {
@@ -54,7 +54,7 @@ class ControllerListenerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Wix\BaseBundle\Exception\AccessDeniedException
+     * @expectedException \Wix\FrameworkBundle\Exception\AccessDeniedException
      */
     public function testPermissionOwnerAtClassWitInvalidPermissions()
     {
@@ -104,13 +104,13 @@ class ControllerListenerTest extends \PHPUnit_Framework_TestCase
      */
     protected function getControllerListener($owner)
     {
-        $instance = $this->getMockBuilder('Wix\BaseBundle\Instance\Instance')
+        $instance = $this->getMockBuilder('Wix\FrameworkBundle\Instance\Instance')
           ->disableOriginalConstructor()
           ->getMock();
 
         $instance->expects($this->any())->method('getPermissions')->will($this->returnValue($owner));
 
-        $decoder = $this->getMockBuilder('Wix\BaseBundle\Instance\Decoder')
+        $decoder = $this->getMockBuilder('Wix\FrameworkBundle\Instance\Decoder')
           ->disableOriginalConstructor()
           ->getMock();
 

@@ -1,8 +1,10 @@
 Wix Framework Bundle
 ========================
 
-The Wix framework bundle provides an easy, powerful way to develop power Wix application for the [Wix.com editor](http://www.wix.com) using the Symfony2 framework.
+The Wix framework bundle provides an easy, powerful way to develop power Wix application for the [Wix.com HTML5 editor](http://www.wix.com) using the Symfony2 framework.
  
+
+[![Build Status](https://secure.travis-ci.org/ranm8/WixFrameworkBundle.png?branch=master)](http://travis-ci.org/ranm8/WixFrameworkBundle)
 
 Installing the Wix Framework Bundle
 ------------------------------------

@@ -14,3 +14,9 @@ services:
         arguments: [@wix_framework.instance_decoder, %wix_framework.config.keys%]
         tags:
             - { name: data_collector, template: "WixFrameworkBundle:Collector:toolbar.html.twig", id: "wix_framework_debug_toolbar" }
+
+    wix_framework.twig:
+        class: Wix\FrameworkBundle\Twig\Extension\WixExtension
+        arguments: [@service_container]
+        tags:
+            - { name: twig.extension }

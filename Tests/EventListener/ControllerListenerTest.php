@@ -12,6 +12,7 @@ use Wix\FrameworkBundle\Tests\EventListener\Fixture\FooControllerPermissionOwner
 use Wix\FrameworkBundle\Tests\EventListener\Fixture\FooControllerPermissionOwnerAtMethod;
 use Wix\FrameworkBundle\Tests\EventListener\Fixture\FooControllerPermissionsAtClassAndMethod;
 use Wix\FrameworkBundle\Tests\EventListener\Fixture\FooControllerWithoutPermission;
+use Wix\FrameworkBundle\Configuration\Permission;
 
 class ControllerListenerTest extends \PHPUnit_Framework_TestCase
 {
@@ -20,14 +21,21 @@ class ControllerListenerTest extends \PHPUnit_Framework_TestCase
      */
     protected $request;
 
+    /**
+     * @var Permission
+     */
+    protected $permission;
+
     public function setUp()
     {
         $this->request = new Request();
+        $this->permission = new Permission(array());
     }
 
     public function tearDown()
     {
         $this->request = null;
+        $this->permission = null;
     }
 
     /**
@@ -104,15 +112,11 @@ class ControllerListenerTest extends \PHPUnit_Framework_TestCase
      */
     protected function getControllerListener($owner)
     {
-        $instance = $this->getMockBuilder('Wix\FrameworkBundle\Instance\Instance')
-          ->disableOriginalConstructor()
-          ->getMock();
+        $instance = $this->getMock('Wix\FrameworkComponent\Instance\InstanceInterface');
 
         $instance->expects($this->any())->method('getPermissions')->will($this->returnValue($owner));
 
-        $decoder = $this->getMockBuilder('Wix\FrameworkBundle\InstanceDecoder')
-          ->disableOriginalConstructor()
-          ->getMock();
+        $decoder = $this->getMock('Wix\FrameworkComponent\InstanceDecoderInterface');
 
         $decoder->expects($this->any())->method('parse')->will($this->returnValue($instance));
 

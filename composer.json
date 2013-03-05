@@ -24,8 +24,10 @@
         "wix/framework-component": "dev-master"
     },
 		"require-dev": {
-			"symfony/framework-bundle": ">=2.1"
-		},
+			"symfony/framework-bundle": ">=2.1",
+			"doctrine/doctrine-bundle": "1.2.*"
+		},		
+		"minimum-stability": "alpha",
     "autoload": {
         "psr-0": { "Wix\\FrameworkBundle": "" }
     },

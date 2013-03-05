@@ -21,13 +21,14 @@
     ],
     "require": {
         "php": ">=5.3.3",
-        "wix/framework-component": "dev-master"
+        "wix/framework-component": "dev-master",
+        "doctrine/mongodb-odm-bundle": "3.0.*"
     },
 		"require-dev": {
 			"symfony/framework-bundle": ">=2.1",
 			"doctrine/doctrine-bundle": "1.2.*"
 		},		
-		"minimum-stability": "alpha",
+		"minimum-stability": "dev",
     "autoload": {
         "psr-0": { "Wix\\FrameworkBundle": "" }
     },

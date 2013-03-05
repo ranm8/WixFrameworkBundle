@@ -9,14 +9,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Response;
 use Wix\FrameworkBundle\Configuration\Permission;
 
-class WixController extends Controller
+abstract class WixController extends Controller
 {
-    /**
-     * @Route("/")
-     * @Method({"GET"})
-     */
-    public function indexAction()
+    protected function getCurrentUser()
     {
-        return new Response('Hello Wix!');
+
     }
+
 }

@@ -1,14 +1,14 @@
 {% extends 'WebProfilerBundle:Profiler:layout.html.twig' %}
 
 {% block toolbar %}
-    {% if collector.instance is not null %}
-        {% set icon %}
-            <span>
-                <img width="13" height="28" alt="Memory Usage" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAcBAMAAABITyhxAAAAJ1BMVEXNzc3///////////////////////8/Pz////////////+NjY0/Pz9lMO+OAAAADHRSTlMAABAgMDhAWXCvv9e8JUuyAAAAQ0lEQVQI12MQBAMBBmLpMwoMDAw6BxjOOABpHyCdAKRzsNDp5eXl1KBh5oHBAYY9YHoDQ+cqIFjZwGCaBgSpBrjcCwCZgkUHKKvX+wAAAABJRU5ErkJggg=="/>
-                <span>Wix information</span>
-            </span>
-        {% endset %}
-        {% set text %}
+    {% set icon %}
+        <span>
+            <img width="13" height="28" alt="Memory Usage" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAcBAMAAABITyhxAAAAJ1BMVEXNzc3///////////////////////8/Pz////////////+NjY0/Pz9lMO+OAAAADHRSTlMAABAgMDhAWXCvv9e8JUuyAAAAQ0lEQVQI12MQBAMBBmLpMwoMDAw6BxjOOABpHyCdAKRzsNDp5eXl1KBh5oHBAYY9YHoDQ+cqIFjZwGCaBgSpBrjcCwCZgkUHKKvX+wAAAABJRU5ErkJggg=="/>
+            <span>Wix information</span>
+        </span>
+    {% endset %}
+    {% set text %}
+        {% if collector.instance is not null %}
             <div class="sf-toolbar-info-piece">
                 <b>Instance ID</b>
                 <span>{{ collector.instance.instance_id }}</span>
@@ -25,14 +25,18 @@
                 <b>Permissions</b>
                 <span>{{ collector.instance.permissions }}</span>
             </div>
+        {% else %}
             <div class="sf-toolbar-info-piece">
-                <a target="_blank"
-                   href="http://editor.wix.com/html/editor/web/renderer/new?siteId=b1b3473c-8124-4de4-a074-0f650b1b3ee4&editorSessionId=2107643A-2685-4A53-9AED-0F485F43AC9A&appDefinitionId={{ collector.keys.application_key }}">
-                    View in Wix editor</a>
+                <span>There was a problem parsing the instance. It's either not available or invalid.</span>
             </div>
-        {% endset %}
-        {% include '@WebProfiler/Profiler/toolbar_item.html.twig' with { 'link': false } %}
-    {% endif %}
+        {% endif %}
+        <div class="sf-toolbar-info-piece">
+            <a target="_blank"
+               href="http://editor.wix.com/html/editor/web/renderer/new?siteId=b1b3473c-8124-4de4-a074-0f650b1b3ee4&editorSessionId=2107643A-2685-4A53-9AED-0F485F43AC9A&appDefinitionId={{ collector.keys.application_key }}">
+                View in Wix editor</a>
+        </div>
+    {% endset %}
+    {% include '@WebProfiler/Profiler/toolbar_item.html.twig' with { 'link': true } %}
 {% endblock %}
 
 {% block head %}
@@ -61,6 +65,10 @@
             <tr>
                 <td><code>{{ key }}</code></td>
                 <td><code>{{ value }}</code></td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">There was a problem parsing the instance. It's either not available or invalid.</td>
             </tr>
         {% endfor %}
     </table>

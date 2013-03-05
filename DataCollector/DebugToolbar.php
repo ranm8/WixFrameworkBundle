@@ -5,7 +5,7 @@ namespace Wix\FrameworkBundle\DataCollector;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Wix\FrameworkComponent\InstanceDecoder;
+use Wix\FrameworkComponent\InstanceDecoderInterface;
 use Wix\FrameworkComponent\Instance\InstanceInterface;
 use Wix\FrameworkComponent\Exception\InvalidInstanceException;
 
@@ -24,10 +24,10 @@ class DebugToolbar extends DataCollector
     /**
      * Constructor.
      *
-     * @param InstanceDecoder $decoder
+     * @param InstanceDecoderInterface $decoder
      * @param array $keys
      */
-    public function __construct(InstanceDecoder $decoder, array $keys)
+    public function __construct(InstanceDecoderInterface $decoder, array $keys)
     {
         $this->decoder = $decoder;
         $this->keys = $keys;
@@ -40,22 +40,23 @@ class DebugToolbar extends DataCollector
      */
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
+        $this->data = array(
+            'keys' => $this->keys
+        );
+
         try {
             /** @var InstanceInterface $instance */
             $instance = $this->decoder->parse($request->get('instance'));
-        } catch (InvalidInstanceException $exception) {
-            return;
-        }
 
-        $this->data = array(
-            'instance' => array(
+            $this->data['instance'] = array(
                 'instance_id' => $instance->getInstanceId(),
                 'sign_date' => $instance->getSignDate(),
                 'uid' => $instance->getUid(),
                 'permissions' => $instance->getPermissions(),
-            ),
-            'keys' => $this->keys,
-        );
+            );
+        } catch (InvalidInstanceException $exception) {
+            $this->data['instance'] = null;
+        }
     }
 
     /**

@@ -110,7 +110,7 @@ class ControllerListenerTest extends \PHPUnit_Framework_TestCase
 
         $instance->expects($this->any())->method('getPermissions')->will($this->returnValue($owner));
 
-        $decoder = $this->getMockBuilder('Wix\FrameworkBundle\Instance\Decoder')
+        $decoder = $this->getMockBuilder('Wix\FrameworkBundle\InstanceDecoder')
           ->disableOriginalConstructor()
           ->getMock();
 

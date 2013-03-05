@@ -21,7 +21,7 @@ For including WixFrameworkBundle as dependancy for your Symfony2 application jus
 
 Then, run composer:
 
-    composer install
+    composer.phar install
 
 
 What's inside?

@@ -6,7 +6,7 @@ catalog.xml
 Propel/om/*
 Propel/map/*
 
-vendor/*
+vendor/
 
 .project
 .settings

@@ -23,7 +23,36 @@ Then, run composer:
 
     composer.phar update wix/framework-bundle
 
+Add the following lines to app/AppKernel.php
+
+    $bundles = array(
+        ...
+        new Wix\FrameworkBundle\WixFrameworkBundle(),
+        ...
+    );
+
+Add you Wix app keys (You can get them by [Creating Wix app via Wix Dev Center](http://dev.wix.com) to config.yml :
+
+    wix_framework:
+      keys:
+        application_key: 12e09531-deff-498d-c7e4-782fcfc2c88a
+        application_secret: c20e90e6-0a53-49b2-9705-20b1dfbea22e
 
 What's inside?
 ---------------
 
+### The Wix Controller
+
+### Security Annotations
+
+### Wix Instance Decoding
+
+### Built-in MongoDB Wix Document Management
+
+### Settings and View support
+
+### Wix Twig Filters
+
+### Wix Debug Toolbar
+
+### Fully Unit-tested

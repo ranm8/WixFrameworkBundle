@@ -120,4 +120,15 @@ abstract class WixController extends Controller
     {
         return $this->getDocumentManager()->getRepository($class);
     }
+
+    /**
+     * @param $user
+     * @return User
+     */
+    protected function updateUserDoc($user) {
+        $this->getDocumentManager()->persist($user);
+        $this->getDocumentManager()->flush();
+
+        return $user;
+    }
 }

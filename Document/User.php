@@ -12,7 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * A general purpose user document to use for Wix applications. It has two unique indexes: an instance id an a
  * component id.
  */
-class User
+class User implements UserInterface
 {
     /**
      * @MongoDB\Id
@@ -33,6 +33,33 @@ class User
      * @MongoDB\Date
      */
     protected $createdAt;
+
+    /**
+     * @MongoDB\Date
+     */
+    protected $updatedAt;
+
+    /**
+     * @inheritDoc
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getUpdatedAt()
+    {
+        if (null === $this->updatedAt) {
+            return null;
+        }
+
+        return $this->updatedAt->getTimestamp();
+    }
 
     /**
      * @param $instanceId
@@ -57,13 +84,11 @@ class User
     }
 
     /**
-     * Get createdAt
-     *
-     * @return \DateTime $createdAt
+     * @inheritDoc
      */
     public function getCreatedAt()
     {
-      return $this->createdAt;
+      return $this->createdAt->getTimestamp();
     }
 
     /**
@@ -79,9 +104,7 @@ class User
     }
 
     /**
-     * Get instanceId
-     *
-     * @return $instanceId
+     * @inheritDoc
      */
     public function getInstanceId()
     {
@@ -101,9 +124,7 @@ class User
     }
 
     /**
-     * Get componentId
-     *
-     * @return $componentId
+     * @inheritDoc
      */
     public function getComponentId()
     {

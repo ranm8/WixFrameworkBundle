@@ -73,14 +73,7 @@ abstract class WixController extends Controller
         $query = $this->getRequest()->query;
 
         $componentId = $query->has('origCompId') ? $query->get('origCompId') : $query->get('compId');
-
-        if ($componentId === null) {
-            throw new MissingParametersException('Could not find a component id (originCompId or compId query string parameter).');
-        }
-
-        if (preg_match("/^(TPWdgt|TPSttngs)/", $componentId) == false) {
-            throw new MissingParametersException('Invalid component id. should be in the format of "TPWdgt" or "TPSttngs" with a digit appended to it.');
-        }
+        $this->validateComponentId($componentId);
 
         if ($full === false) {
             $componentId = preg_replace("/^(TPWdgt|TPSttngs)/", "", $componentId);
@@ -90,7 +83,22 @@ abstract class WixController extends Controller
     }
 
     /**
-     *
+     * Validates the Wix component ID
+     * @param $compId
+     * @throws \Wix\FrameworkBundle\Exception\MissingParametersException
+     */
+    protected function validateComponentId($compId) {
+        if (null === $compId) {
+            throw new MissingParametersException('Could not find a component id (originCompId or compId query string parameter).');
+        }
+
+        if (preg_match("/^(TPWdgt|TPSttngs|TPSctn)/", $compId) == false) {
+            throw new MissingParametersException('Invalid component id. should be in the format of "TPWdgt" or "TPSttngs" with a digit appended to it.');
+        }
+    }
+
+    /**
+     * Returns user document from DB
      *
      * @return User
      */

@@ -35,8 +35,8 @@ Add you Wix app keys (You can get them by [Creating Wix app via Wix Dev Center](
 
     wix_framework:
       keys:
-        application_key: 12e09531-deff-498d-c7e4-782fcfc2c88a
-        application_secret: c20e90e6-0a53-49b2-9705-20b1dfbea22e
+        application_key: 238cmkd-asdk292-832d-sa33-489aklsd9393
+        application_secret: 238cmkd-asdk292-832d-sa33-489aklsd9393
 
 What's inside?
 ---------------

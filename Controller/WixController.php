@@ -13,6 +13,10 @@ use Doctrine\ODM\MongoDB\DocumentRepository;
 use Wix\FrameworkComponent\Instance\Instance;
 use Wix\FrameworkBundle\Document\User;
 use Wix\FrameworkBundle\Exception\MissingParametersException;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 abstract class WixController extends Controller
 {
@@ -73,7 +77,14 @@ abstract class WixController extends Controller
         $query = $this->getRequest()->query;
 
         $componentId = $query->has('origCompId') ? $query->get('origCompId') : $query->get('compId');
-        $this->validateComponentId($componentId);
+
+        if ($componentId === null) {
+            throw new MissingParametersException('Could not find a component id (originCompId or compId query string parameter).');
+        }
+
+        if (preg_match("/^(TPWdgt|TPSttngs|TPSctn)/", $componentId) == false) {
+            throw new MissingParametersException('Invalid component id. should be in the format of "TPWdgt" or "TPSttngs" with a digit appended to it.');
+        }
 
         if ($full === false) {
             $componentId = preg_replace("/^(TPWdgt|TPSttngs)/", "", $componentId);
@@ -83,22 +94,7 @@ abstract class WixController extends Controller
     }
 
     /**
-     * Validates the Wix component ID
-     * @param $compId
-     * @throws \Wix\FrameworkBundle\Exception\MissingParametersException
-     */
-    protected function validateComponentId($compId) {
-        if (null === $compId) {
-            throw new MissingParametersException('Could not find a component id (originCompId or compId query string parameter).');
-        }
-
-        if (preg_match("/^(TPWdgt|TPSttngs|TPSctn)/", $compId) == false) {
-            throw new MissingParametersException('Invalid component id. should be in the format of "TPWdgt" or "TPSttngs" with a digit appended to it.');
-        }
-    }
-
-    /**
-     * Returns user document from DB
+     *
      *
      * @return User
      */
@@ -135,8 +131,31 @@ abstract class WixController extends Controller
      */
     protected function updateUserDoc($user) {
         $this->getDocumentManager()->persist($user);
-        $this->getDocumentManager()->flush();
+        $this->getDocumentManager()->flush($user);
 
         return $user;
+    }
+
+    /**
+     * Serializes the object and returns JSON response
+     *
+     * @param $object
+     * @return JsonResponse
+     */
+    protected function jsonResponse($object)
+    {
+        return new JsonResponse($this->getSerializer()->normalize($object, 'json'));
+    }
+
+    /**
+     * Returns GetSetMethod JSON serializer object
+     *
+     * @return Serializer
+     */
+    protected function getSerializer()
+    {
+        $serializer = new Serializer(array(new GetSetMethodNormalizer()), array(new JsonEncoder()));
+
+        return $serializer;
     }
 }

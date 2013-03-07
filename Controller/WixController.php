@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Response;
+use Wix\DemoBundle\Document\ApplicationUser;
 use Wix\FrameworkBundle\Configuration\Permission;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Doctrine\ODM\MongoDB\DocumentRepository;
@@ -36,6 +37,12 @@ abstract class WixController extends Controller
      * @return string
      */
     abstract protected function getDocumentType();
+
+    /**
+     * Implement return your doc class (full path) (e.g. Wix\FrameworkBundle\Document\User), please make sure your doc inherits WixFrameworkBundle:User
+     * @return string
+     */
+    abstract protected function getDocumentClass();
 
     /**
      * @return Instance
@@ -78,12 +85,12 @@ abstract class WixController extends Controller
             throw new MissingParametersException('Could not find a component id (originCompId or compId query string parameter).');
         }
 
-        if (preg_match("/^(TPWdgt|TPSttngs)/", $componentId) == false) {
-            throw new MissingParametersException('Invalid component id. should be in the format of "TPWdgt" or "TPSttngs" with a digit appended to it.');
+        if (preg_match("/^(TPWdgt|TPSttngs|TPSctn)/", $componentId) == false) {
+            throw new MissingParametersException('Invalid component id. should be in the format of "TPWdgt", "TPSctn" or "TPSttngs" with a digit appended to it.');
         }
 
         if ($full === false) {
-            $componentId = preg_replace("/^(TPWdgt|TPSttngs)/", "", $componentId);
+            $componentId = preg_replace("/^(TPWdgt|TPSttngs|TPSctn)/", "", $componentId);
         }
 
         return $componentId;
@@ -106,7 +113,8 @@ abstract class WixController extends Controller
               ));
 
         if ($user === null) {
-            $user = new User($instanceId, $componentId);
+            $class = $this->getDocumentClass();
+            $user = new $class($instanceId, $componentId);
         }
 
         return $user;

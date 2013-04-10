@@ -21,21 +21,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 abstract class WixController extends Controller
 {
-
-    /**
-     * @var Instance
-     */
-    private $instance;
-
-    /**
-     * @var DocumentManager
-     */
-    private $manager;
-
-    public function __construct() {
-
-    }
-
     /**
      * Implement return your doc type (e.g. WixFrameworkBundle:User), please make sure your doc inherits WixFrameworkBundle:User
      * @return string
@@ -53,13 +38,9 @@ abstract class WixController extends Controller
      */
     protected function getInstance()
     {
-        if ($this->instance === null) {
-            $instance = $this->getRequest()->query->get('instance');
-
-            $this->instance = $this->get('wix_framework.instance_decoder')->parse($instance);
-        }
-
-        return $this->instance;
+        return $this->get('wix_framework.instance_decoder')->parse(
+            $this->getRequest()->get('instance')
+        );
     }
 
     /**
@@ -67,11 +48,7 @@ abstract class WixController extends Controller
      */
     protected function getDocumentManager()
     {
-        if ($this->manager === null) {
-            $this->manager = $this->get('doctrine.odm.mongodb.document_manager');
-        }
-
-        return $this->manager;
+        return $this->get('doctrine.odm.mongodb.document_manager');
     }
 
     /**
@@ -162,8 +139,9 @@ abstract class WixController extends Controller
      */
     protected function getSerializer()
     {
-        $serializer = new Serializer(array(new GetSetMethodNormalizer()), array(new JsonEncoder()));
-
-        return $serializer;
+        return new Serializer(
+            array(new GetSetMethodNormalizer()),
+            array(new JsonEncoder())
+        );
     }
 }
